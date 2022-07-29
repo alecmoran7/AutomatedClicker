@@ -17,8 +17,10 @@ startMessage = """
 print(startMessage)
 # print("Current Mouse Position: " + str(pyautogui.position()))
 print("Available modes: (Type one of the digits below [1 or 2] to select a mode)")
-print("1) Single scheduled click")
+print("1) Single scheduled click (no rush)")
 print("2) Beat the clock - be the first one to click on something at a certain time")
+print("3) Multiple scheduled clicks")
+
 clickMode = input()
 
 def clickNow():
@@ -34,12 +36,12 @@ def testingMode(nextClick):
 
 def await_and_click(inputHour, inputMinute, inputSecond = 0, inputMicrosecond = 0):
 
-    print("Move your mouse to the place you would like to click at, then press 'y'")
+    print("Move your mouse to the place you would like to click at, then enter 'y' and press the [ENTER] key")
     success = input()
     global mousePosition
     mousePosition = pyautogui.position()
     while success != "y":
-        print("Move your mouse to the place you would like to click at, then press 'y'")
+        print("Move your mouse to the place you would like to click at, then enter 'y' and press the [ENTER] key")
         success = input()
         mousePosition = pyautogui.position()
     print("You've selected the mouse position: " + str(pyautogui.position()))
@@ -80,6 +82,29 @@ if clickMode == "1":
 if clickMode == "2":
     await_and_click(selectedHour, selectedMinute - 1, 59, 909999)
 
+def multipleClicks():
+	allHours = []
+	allMinutes = []
+	allClickPositions = []
 
+	#TODO: Add First Action here
+
+	#############################
+	# Ask user if they want to continue adding Actions (y/n)
+	print("To add a new click action please press the [ENTER] key, if you are done adding new click actions please type 'done' and then press the [ENTER] key")
+	willContinue = input()
+	if willContinue == "done":
+		print("Done adding actions")
+		# TODO: Start looping through actions
+		#for i in range(len(allHours)):
+	elif willContinue == "":
+		print("Adding a new action")
+		
+		if len(allHours) is 0:
+			print("No actions were added. Exiting...")
+	else:
+		print("Other input")
+if clickMode == "3":
+	multipleClicks()
 
 
